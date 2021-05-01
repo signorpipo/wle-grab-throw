@@ -8,6 +8,10 @@ WL.registerComponent('easy-tune', {
     init: function () {
         this._myWidget = new PP.EasyTuneWidget();
 
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("X", 0, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Y", 0, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Z", 0, 0.5, 4));
+
         //Examples
         //Number: PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Speed", 10.32, 0.01, 3));
         //Integer: PP.EasyTuneVariables.addVariable(new PP.EasyTuneInteger("Lives", 3, 1));
