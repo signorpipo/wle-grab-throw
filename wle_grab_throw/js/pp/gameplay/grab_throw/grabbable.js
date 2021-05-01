@@ -41,5 +41,8 @@ WL.registerComponent('grabbable', {
     _ungrab: function () {
         PP.ObjectUtils.reparentKeepTransform(this.object, this._myOldParent);
         this._myIsGrabbed = false;
+        if (this._myPhysx) {
+            this._myPhysx.kinematic = false;
+        }
     }
 });
