@@ -21,12 +21,12 @@ WL.registerComponent('spawn-grabbable', {
     },
     update: function (dt) {
         if (PP.RightGamepad.getButtonInfo(PP.ButtonType.BOTTOM_BUTTON).isPressEnd()) {
-            this._mySphere.parent = this.object;
-            this._mySphere.resetTranslationRotation();
-            this._mySphere.getComponent("physx").kinematic = true;
+            this._myObject.parent = this.object;
+            this._myObject.resetTranslationRotation();
+            this._myObject.getComponent("physx").kinematic = true;
         }
 
-        let temp = this._mySphere.scalingWorld; //#BUG physx not updating and weird scaling without calling this getter (???)
+        let temp = this._myObject.scalingWorld; //#BUG physx not updating and weird scaling without calling this getter (???)
 
         //this.object.setTranslationLocal([PP.EasyTuneVariables.get("X").myValue, PP.EasyTuneVariables.get("Y").myValue, PP.EasyTuneVariables.get("Z").myValue]);
     },
