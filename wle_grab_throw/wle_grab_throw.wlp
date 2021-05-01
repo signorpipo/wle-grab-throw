@@ -179,9 +179,9 @@
                     "light": {
                         "attenuation": 0.10000000149011612,
                         "color": [
-                            0.9529411792755127,
+                            0.9529411792755128,
                             0.8006024360656738,
-                            0.33633217215538027
+                            0.3363321721553803
                         ]
                     }
                 }
@@ -307,7 +307,8 @@
                     "console-vr": {
                         "_myPlaneMaterial": "66",
                         "_myTextMaterial": "DefaultFontMaterial",
-                        "_myHandedness": "left"
+                        "_myHandedness": "left",
+                        "_myShowOnStart": false
                     }
                 },
                 {
@@ -421,6 +422,13 @@
                         "_myCursorMaterial": "66",
                         "_myShowFingerCursor": false
                     }
+                },
+                {
+                    "type": "grab",
+                    "grab": {
+                        "_myHandedness": "right",
+                        "_myCollider": "73"
+                    }
                 }
             ],
             "name": "Hand Right"
@@ -485,6 +493,468 @@
                     }
                 }
             ],
+            "deleted": true
+        },
+        "68": {
+            "name": "Test",
+            "parent": "32",
+            "components": [
+                {
+                    "type": "test-hand-pose",
+                    "test-hand-pose": {
+                        "_myHandedness": "right"
+                    },
+                    "active": false
+                }
+            ]
+        },
+        "69": {
+            "name": "Spawn Grabbable",
+            "parent": "32",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.3499999940395355,
+                -0.4000000059604645,
+                -0.5,
+                1.0
+            ],
+            "components": [
+                {
+                    "type": "spawn-grabbable",
+                    "spawn-grabbable": {
+                        "_myObject": "70"
+                    }
+                }
+            ]
+        },
+        "70": {
+            "name": "Sphere",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "71",
+                        "material": "35"
+                    },
+                    "active": true
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.07000000029802323
+                        },
+                        "groups": 1
+                    },
+                    "active": true
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "kinematic": true,
+                        "sphere": {
+                            "radius": 0.07000000029802323
+                        },
+                        "static": false
+                    },
+                    "active": true
+                }
+            ],
+            "transformation": [
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "72": {
+            "link": {
+                "name": "flatSPhere",
+                "file": "assets\\models\\flatSphere.glb"
+            },
+            "parent": "70",
+            "deleted": true
+        },
+        "73": {
+            "name": "Grab Collision",
+            "parent": "58",
+            "components": [
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "groups": 1
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0000001192092896,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.009961039759218693,
+                -0.024026643484830858,
+                -0.05007819831371308,
+                1.0
+            ]
+        },
+        "74": {
+            "name": "Empty.000",
+            "parent": "69",
+            "components": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+            ],
+            "deleted": true
+        },
+        "75": {
+            "name": "Floor",
+            "parent": "32",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "plane",
+                        "static": true
+                    }
+                }
+            ],
+            "transformation": [
+                -8.344662205672648e-7,
+                1.000001311302185,
+                0.0,
+                0.0,
+                -1.000001311302185,
+                -8.344662205672648e-7,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.00006270408630371094,
+                -2.000011444091797,
+                0.0,
+                1.0
+            ]
+        },
+        "76": {
+            "name": "Cube",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.07000000029802323,
+                                0.07000000029802323
+                            ]
+                        },
+                        "kinematic": true
+                    },
+                    "active": false
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "collider": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.07000000029802323,
+                                0.07000000029802323
+                            ]
+                        },
+                        "groups": 1
+                    }
+                }
+            ],
+            "transformation": [
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.07000000029802323,
+                0.0,
+                0.0,
+                -2000.0,
+                0.0,
+                1.0
+            ]
+        },
+        "77": {
+            "name": "Target",
+            "parent": "32",
+            "components": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                {
+                    "mesh": {
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "move_target"
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                -2.0,
+                1.0
+            ]
+        },
+        "79": {
+            "link": {
+                "name": "target",
+                "file": "assets\\models\\target.glb"
+            },
+            "parent": "77",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                -1.192092895507813e-7,
+                0.9999999403953552,
+                0.0,
+                0.0,
+                -0.9999999403953552,
+                -1.192092895507813e-7,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "name": "Target Edges",
+            "components": [
+                {
+                    "mesh": {
+                        "material": "34"
+                    },
+                    "active": true
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "triangleMesh",
+                        "triangleMesh": {
+                            "mesh": "78"
+                        },
+                        "convexMesh": {
+                            "mesh": "78"
+                        },
+                        "static": false,
+                        "kinematic": true
+                    }
+                }
+            ]
+        },
+        "80": {
+            "name": "Mesh",
+            "parent": "79",
+            "deleted": true
+        },
+        "81": {
+            "name": "Target Collision",
+            "parent": "77",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "sphere",
+                        "convexMesh": {
+                            "mesh": "82"
+                        },
+                        "static": false,
+                        "triangleMesh": {
+                            "mesh": "82"
+                        },
+                        "trigger": false,
+                        "sphere": {
+                            "radius": 0.25
+                        },
+                        "kinematic": true,
+                        "block": 255
+                    },
+                    "active": false
+                },
+                {
+                    "type": "test-react-on-collision"
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.25
+                        },
+                        "groups": 1
+                    }
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                -1.192092895507813e-7,
+                1.0000001192092896,
+                0.0,
+                0.0,
+                -1.0000001192092896,
+                -1.192092895507813e-7,
+                0.0,
+                0.0,
+                1.788139343261719e-7,
+                0.0,
+                1.0
+            ]
+        },
+        "83": {
+            "link": {
+                "name": "target",
+                "file": "assets\\models\\target_collision.glb"
+            },
+            "parent": "81",
             "deleted": true
         }
     },
@@ -608,6 +1078,24 @@
                 "name": "Mesh.008",
                 "file": "assets\\models\\quest_controllers_credits_Jezza3D.glb"
             }
+        },
+        "71": {
+            "link": {
+                "name": "Icosphere",
+                "file": "assets\\models\\flatSphere.glb"
+            }
+        },
+        "78": {
+            "link": {
+                "name": "Cylinder",
+                "file": "assets\\models\\target.glb"
+            }
+        },
+        "82": {
+            "link": {
+                "name": "Cylinder",
+                "file": "assets\\models\\target_collision.glb"
+            }
         }
     },
     "textures": {
@@ -726,13 +1214,13 @@
                 "diffuseColor": [
                     1.0,
                     0.587358832359314,
-                    0.18431371450424195,
+                    0.184313714504242,
                     1.0
                 ],
                 "ambientColor": [
                     0.6196078062057495,
                     0.36692821979522707,
-                    0.11906188726425171,
+                    0.11906188726425172,
                     1.0
                 ]
             }
@@ -842,10 +1330,14 @@
                 "/js/components/",
                 "js/pp",
                 "js/pp/cauldron",
-                "js/pp/gamepad",
                 "js/pp/tool/cauldron",
                 "js/pp/tool/console-vr",
-                "js/pp/tool/easy-tune"
+                "js/pp/tool/easy-tune",
+                "js/pp/input/gamepad",
+                "js/pp/input/cauldron",
+                "js/test",
+                "js/pp/gameplay/grab_throw",
+                "js/cauldron"
             ]
         },
         "editor": {
@@ -860,11 +1352,20 @@
                 0.871141791343689,
                 1.0
             ]
+        },
+        "physx": {
+            "enable": true
+        },
+        "runtime": {
+            "visualizeColliders": false
         }
     },
     "animations": {},
     "skins": {},
     "files": [
-        "assets/models/quest_controllers_credits_Jezza3D.glb"
+        "assets/models/quest_controllers_credits_Jezza3D.glb",
+        "assets/models/flatSphere.glb",
+        "assets/models/target.glb",
+        "assets/models/target_collision.glb"
     ]
 }
