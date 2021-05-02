@@ -463,7 +463,9 @@
                     "type": "grab",
                     "grab": {
                         "_myHandedness": "right",
-                        "_myCollider": "73"
+                        "_myCollider": "73",
+                        "_myThrowStrengthMultiplier": 2,
+                        "_myThrowStrengthExtraPercentage": 0.4000000059604645
                     }
                 }
             ],
