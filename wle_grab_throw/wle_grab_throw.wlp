@@ -119,6 +119,24 @@
                         "type": "eye left"
                     }
                 }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
             ]
         },
         "19": {
@@ -134,6 +152,24 @@
                         "type": "eye right"
                     }
                 }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
             ]
         },
         "21": {
@@ -308,7 +344,7 @@
                         "_myPlaneMaterial": "66",
                         "_myTextMaterial": "DefaultFontMaterial",
                         "_myHandedness": "left",
-                        "_myShowOnStart": false
+                        "_myShowOnStart": true
                     }
                 },
                 {
@@ -731,7 +767,7 @@
                                 0.07000000029802323
                             ]
                         },
-                        "kinematic": true
+                        "kinematic": false
                     },
                     "active": false
                 },
@@ -818,7 +854,10 @@
                     }
                 },
                 {
-                    "type": "move_target"
+                    "type": "move_target",
+                    "move_target": {
+                        "_myPhysx": "79"
+                    }
                 }
             ],
             "transformation": [
@@ -835,8 +874,8 @@
                 1.0,
                 0.0,
                 0.0,
-                0.0,
-                -2.0,
+                0.25,
+                -3.0,
                 1.0
             ]
         },
@@ -927,7 +966,8 @@
                             "radius": 0.25
                         },
                         "groups": 1
-                    }
+                    },
+                    "active": true
                 }
             ],
             "transformation": [
@@ -936,18 +976,19 @@
                 0.0,
                 0.0,
                 0.0,
-                -1.192092895507813e-7,
-                1.0000001192092896,
+                -1.1920920428565297e-7,
+                0.999999225139618,
                 0.0,
                 0.0,
-                -1.0000001192092896,
-                -1.192092895507813e-7,
+                -0.999999225139618,
+                -1.1920920428565297e-7,
                 0.0,
                 0.0,
-                1.788139343261719e-7,
+                2.384185791015625e-7,
                 0.0,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "83": {
             "link": {
@@ -956,6 +997,42 @@
             },
             "parent": "81",
             "deleted": true
+        },
+        "84": {
+            "name": "Target Collider",
+            "parent": "77",
+            "components": [
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.25
+                        },
+                        "groups": 1
+                    }
+                },
+                {
+                    "type": "test-react-on-collision"
+                }
+            ],
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                -0.15000000596046449,
+                1.0
+            ]
         }
     },
     "meshes": {
@@ -1357,7 +1434,7 @@
             "enable": true
         },
         "runtime": {
-            "visualizeColliders": false
+            "visualizeColliders": true
         }
     },
     "animations": {},
