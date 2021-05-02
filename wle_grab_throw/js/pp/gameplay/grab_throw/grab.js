@@ -1,12 +1,11 @@
 WL.registerComponent('grab', {
     _myHandedness: { type: WL.Type.Enum, values: ['left', 'right'], default: 'left' },
-    _myThrowStrengthExtraPercentage: { type: WL.Type.Float, default: 0.3 },
     _myCollider: { type: WL.Type.Object }
 }, {
     init: function () {
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneInteger("Min History", 2, 0.5));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneInteger("Min", 2, 0.5));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Perc", 0.3, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Thres", 15, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 0.1, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max", 23, 1, 4));
 
         this._myGamepad = null;
 
@@ -31,15 +30,23 @@ WL.registerComponent('grab', {
         this._myGrabbedLinearVelocityHistory = new Array(this._myHistorySize);
         this._myGrabbedLinearVelocityHistory.fill(0);
 
-        this._myThrowStrengthMinThreshold = 2;
-        this._myThrowStrengthMaxThreshold = 7;
+        this._myThrowLinearStrengthMinThreshold = 2;
+        this._myThrowLinearStrengthMaxThreshold = 3;
+        this._myThrowLinearStrengthExtraPercentage = 0.3;
+        this._myThrowLinearMaxStrength = 15;
+
+        this._myThrowAngularStrengthDampingThreshold = 15;
+        this._myThrowAngularStrengthDamping = 0.1;
+        this._myThrowAngularMaxStrength = 23;
 
     },
     start: function () {
     },
     update: function (dt) {
-        this._myThrowStrengthExtraPercentage = PP.EasyTuneVariables.get("Perc").myValue;
-        this._myThrowStrengthMinThreshold = PP.EasyTuneVariables.get("Min").myValue;
+        this._myThrowAngularStrengthDampingThreshold = PP.EasyTuneVariables.get("Thres").myValue;
+        this._myThrowAngularStrengthDamping = PP.EasyTuneVariables.get("Damp").myValue;
+        this._myThrowAngularMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
+
         if (this._myGrabbed) {
             this._updateVelocityHistory();
         }
@@ -64,13 +71,10 @@ WL.registerComponent('grab', {
     },
     _grabEnd: function (e) {
         if (this._myGrabbed) {
-            let linearVelocity = this._myGrabbed.myPhysx.linearVelocity;
+            let linearVelocity = this._computeReleaseLinearVelocity();
+            let angularVelocity = this._computeReleaseAngularVelocity();
 
-            if (this._myHistoryCurrentCount >= this._myHistorySize) {
-                linearVelocity = this._computeReleaseLinearVelocity();
-            }
-
-            this._myGrabbed.release(linearVelocity, this._myGrabbed.myPhysx.angularVelocity);
+            this._myGrabbed.release(linearVelocity, angularVelocity);
             this._myGrabbed = null;
         }
     },
@@ -79,9 +83,30 @@ WL.registerComponent('grab', {
 
         this._myGrabbedLinearVelocityHistory.unshift(this._myGrabbed.myPhysx.linearVelocity.slice(0));
         this._myGrabbedLinearVelocityHistory.pop();
-        //console.log({ a: this._myGrabbedLinearVelocityHistory.map(function (a) { return a.map(function (b) { return b.toFixed(4); }); }) });
     },
     _computeReleaseLinearVelocity() {
+        if (this._myHistoryCurrentCount < this._myHistorySize) {
+            return this._myGrabbed.myPhysx.linearVelocity;
+        }
+
+        //strength
+        let strength = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
+        //let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
+        for (let i = 1; i < this._myHistoryStrengthAverageFromStart; i++) {
+            strength += glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[i]);
+        }
+        strength /= this._myHistoryStrengthAverageFromStart;
+        //console.log(this._myGrabbedLinearVelocityHistory.slice(0, this._myHistoryStrengthAverageFromStart).map(function (a) { return glMatrix.vec3.length(a); }));
+        //console.log(strength2, " - ", strength);
+
+        let strengthMultiplierIntensity = (strength - this._myThrowLinearStrengthMinThreshold) / (this._myThrowLinearStrengthMaxThreshold - this._myThrowLinearStrengthMinThreshold); //linear equation
+        strengthMultiplierIntensity = Math.min(1, Math.max(0, strengthMultiplierIntensity));
+
+        strength += strength * this._myThrowLinearStrengthExtraPercentage * strengthMultiplierIntensity;
+        strength = Math.min(strength, this._myThrowLinearMaxStrength);
+
+        //console.log(strength.toFixed(4));
+
         //direction
         let directionCurrentWeight = this._myHistoryDirectionAverageFromEnd;
         let direction = [0, 0, 0];
@@ -94,25 +119,30 @@ WL.registerComponent('grab', {
         }
         glMatrix.vec3.normalize(direction, direction);
 
+        glMatrix.vec3.scale(direction, direction, strength);
+
+        return direction;
+    },
+    _computeReleaseAngularVelocity() {
         //strength
-        let strength = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
-        for (let i = 1; i < this._myHistoryStrengthAverageFromStart; i++) {
-            strength += glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[i]);
+        let strength = glMatrix.vec3.length(this._myGrabbed.myPhysx.angularVelocity);
+        //let strength2 = glMatrix.vec3.length(this._myGrabbed.myPhysx.angularVelocity);
+
+        if (strength > this._myThrowAngularStrengthDampingThreshold) {
+            strength = this._myThrowAngularStrengthDampingThreshold + (strength - this._myThrowAngularStrengthDampingThreshold) * this._myThrowAngularStrengthDamping;
         }
-        strength /= this._myHistoryStrengthAverageFromStart;
 
-        //console.log("originalll", strength);
+        strength = Math.min(strength, this._myThrowAngularMaxStrength);
 
-        let strengthMultiplierIntensity = (strength - this._myThrowStrengthMinThreshold) / (this._myThrowStrengthMaxThreshold - this._myThrowStrengthMinThreshold); //linear equation
-        strengthMultiplierIntensity = Math.min(1, Math.max(0, strengthMultiplierIntensity));
+        //console.log(strength2, " - ", strength);
+        //console.log(strength.toFixed(4));
 
-        strength += strength * this._myThrowStrengthExtraPercentage * strengthMultiplierIntensity;
+        //direction
+        let direction = this._myGrabbed.myPhysx.angularVelocity.slice(0);
+        glMatrix.vec3.normalize(direction, direction);
 
         glMatrix.vec3.scale(direction, direction, strength);
 
-        //console.log("multiplied", strength);
-
         return direction;
-
     }
 });
