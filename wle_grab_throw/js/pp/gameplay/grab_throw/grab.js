@@ -1,6 +1,7 @@
 WL.registerComponent('grab', {
     _myHandedness: { type: WL.Type.Enum, values: ['left', 'right'], default: 'left' },
-    _myCollider: { type: WL.Type.Object }
+    _myCollider: { type: WL.Type.Object },
+    _mySnapOnPivot: { type: WL.Type.Bool, default: false }
 }, {
     init: function () {
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Thres", 3, 0.5, 4));
@@ -43,6 +44,9 @@ WL.registerComponent('grab', {
     start: function () {
     },
     update: function (dt) {
+        if (PP.RightGamepad.getButtonInfo(PP.ButtonType.SQUEEZE).isPressStart()) {
+            this._mySnapOnPivot = !this._mySnapOnPivot;
+        }
         this._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Thres").myValue;
         this._myThrowLinearStrengthExtraPercentage = PP.EasyTuneVariables.get("Damp").myValue;
         this._myThrowLinearMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
@@ -60,6 +64,12 @@ WL.registerComponent('grab', {
                     this._myGrabbed = grabbable;
                     this._myGrabbed.grab(this.object);
                     this._myGrabbed.registerUngrabEventListener(this, this._onUngrab.bind(this));
+
+                    if (this._mySnapOnPivot) {
+                        this._myGrabbed.object.resetTranslation();
+                        this._myGrabbed.object.setTranslationLocal([0.001, 0.001, 0.001]); //helps a bit with gaining more speed
+                    }
+
                     break;
                 }
             }
