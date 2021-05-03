@@ -5,6 +5,6 @@ WL.registerComponent('fix-physx-kinematic-parent', {
     start: function () {
     },
     update: function (dt) {
-        this.object.transformWorld; //#BUG physx not updating and weird scaling without calling this getter (???)
+        this.object.scalingWorld; //#BUG physx not updating and weird scaling without calling this getter (???)
     },
 });

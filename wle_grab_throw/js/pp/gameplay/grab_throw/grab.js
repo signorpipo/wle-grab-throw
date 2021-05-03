@@ -3,9 +3,9 @@ WL.registerComponent('grab', {
     _myCollider: { type: WL.Type.Object }
 }, {
     init: function () {
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Thres", 15, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 0.1, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max", 23, 1, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Thres", 3, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 1, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max", 15, 1, 4));
 
         this._myGamepad = null;
 
@@ -32,7 +32,7 @@ WL.registerComponent('grab', {
 
         this._myThrowLinearStrengthMinThreshold = 2;
         this._myThrowLinearStrengthMaxThreshold = 3;
-        this._myThrowLinearStrengthExtraPercentage = 0.3;
+        this._myThrowLinearStrengthExtraPercentage = 1;
         this._myThrowLinearMaxStrength = 15;
 
         this._myThrowAngularStrengthDampingThreshold = 15;
@@ -43,9 +43,9 @@ WL.registerComponent('grab', {
     start: function () {
     },
     update: function (dt) {
-        this._myThrowAngularStrengthDampingThreshold = PP.EasyTuneVariables.get("Thres").myValue;
-        this._myThrowAngularStrengthDamping = PP.EasyTuneVariables.get("Damp").myValue;
-        this._myThrowAngularMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
+        this._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Thres").myValue;
+        this._myThrowLinearStrengthExtraPercentage = PP.EasyTuneVariables.get("Damp").myValue;
+        this._myThrowLinearMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
 
         if (this._myGrabbed) {
             this._updateVelocityHistory();
@@ -105,6 +105,7 @@ WL.registerComponent('grab', {
         strength += strength * this._myThrowLinearStrengthExtraPercentage * strengthMultiplierIntensity;
         strength = Math.min(strength, this._myThrowLinearMaxStrength);
 
+        //console.log(strength2, " - ", strength);
         //console.log(strength.toFixed(4));
 
         //direction

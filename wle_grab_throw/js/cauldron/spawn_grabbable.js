@@ -1,6 +1,7 @@
 WL.registerComponent('spawn-grabbable', {
     _myObject1: { type: WL.Type.Object },
     _myObject2: { type: WL.Type.Object },
+    _myObject3: { type: WL.Type.Object },
     //_myMesh: { type: WL.Type.Mesh },
     //_myRadius: { type: WL.Type.Int, default: 1 }
 }, {
@@ -17,7 +18,7 @@ WL.registerComponent('spawn-grabbable', {
             });
         let a = 2;
         */
-        this._myObjectList = [this._myObject1, this._myObject2];
+        this._myObjectList = [this._myObject1, this._myObject2, this._myObject3];
 
         for (let i = 0; i < this._myObjectList.length; ++i) {
             let object = this._myObjectList[i];

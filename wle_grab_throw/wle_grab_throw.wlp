@@ -344,8 +344,9 @@
                         "_myPlaneMaterial": "66",
                         "_myTextMaterial": "DefaultFontMaterial",
                         "_myHandedness": "left",
-                        "_myShowOnStart": true
-                    }
+                        "_myShowOnStart": false
+                    },
+                    "active": true
                 },
                 {
                     "type": "easy-tune",
@@ -354,7 +355,8 @@
                         "_myHandedness": "left",
                         "_myPlaneMaterial": "66",
                         "_myTextMaterial": "DefaultFontMaterial"
-                    }
+                    },
+                    "active": true
                 }
             ],
             "name": "Hand Left"
@@ -573,7 +575,8 @@
                     "spawn-grabbable": {
                         "_myObject": "76",
                         "_myObject1": "70",
-                        "_myObject2": "76"
+                        "_myObject2": "76",
+                        "_myObject3": "102"
                     }
                 }
             ]
@@ -760,7 +763,7 @@
                     "type": "mesh",
                     "mesh": {
                         "mesh": "8",
-                        "material": "35"
+                        "material": "34"
                     }
                 },
                 {
@@ -894,23 +897,23 @@
                 "name": "target",
                 "file": "assets\\models\\target.glb"
             },
-            "parent": "77",
+            "parent": "85",
             "transformation": [
                 1.0,
                 0.0,
                 0.0,
                 0.0,
                 0.0,
-                -1.192092895507813e-7,
-                0.9999999403953552,
-                0.0,
-                0.0,
-                -0.9999999403953552,
-                -1.192092895507813e-7,
+                1.0000001192092896,
                 0.0,
                 0.0,
                 0.0,
                 0.0,
+                1.0000001192092896,
+                0.0,
+                0.0,
+                0.0,
+                -1.4901161193847657e-8,
                 1.0
             ],
             "name": "Target Edges",
@@ -1013,7 +1016,7 @@
         },
         "84": {
             "name": "Target Collider",
-            "parent": "77",
+            "parent": "85",
             "components": [
                 {
                     "type": "collision",
@@ -1021,11 +1024,36 @@
                         "sphere": {
                             "radius": 0.25
                         },
-                        "groups": 1
+                        "groups": 1,
+                        "collider": "box",
+                        "box": {
+                            "extents": [
+                                0.5,
+                                0.5,
+                                0.07000000029802323
+                            ]
+                        }
                     }
                 },
                 {
                     "type": "test-react-on-collision"
+                },
+                {
+                    "type": "spawn-particles",
+                    "spawn-particles": {
+                        "_myObject1": "87",
+                        "_myObject2": "90",
+                        "_myObject3": "93",
+                        "_myObject4": "96",
+                        "_myObject5": "97",
+                        "_myObject6": "98",
+                        "_myObject7": "99",
+                        "_myObject8": "100",
+                        "_myObject9": "101",
+                        "_myObject10": "112",
+                        "_myObject11": "117",
+                        "_myObject12": "119"
+                    }
                 }
             ],
             "transformation": [
@@ -1034,16 +1062,1003 @@
                 0.0,
                 0.0,
                 0.0,
+                -1.1920868558945586e-7,
+                -1.000000238418579,
+                0.0,
+                0.0,
+                1.000000238418579,
+                -1.1920868558945586e-7,
+                0.0,
+                0.0,
+                -0.35960841178894045,
+                -0.0000015944242477416993,
+                1.0
+            ]
+        },
+        "85": {
+            "name": "Dynamic Move",
+            "parent": "77",
+            "transformation": [
                 1.0,
                 0.0,
                 0.0,
                 0.0,
                 0.0,
+                -1.1920928244535389e-7,
+                0.9999998807907105,
+                0.0,
+                0.0,
+                -0.9999998807907105,
+                -1.1920928244535389e-7,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "components": [
+                {
+                    "type": "move-on-sphere"
+                }
+            ]
+        },
+        "86": {
+            "name": "Particles",
+            "parent": "85",
+            "transformation": [
                 1.0,
                 0.0,
                 0.0,
                 0.0,
-                -0.18613386154174806,
+                0.0,
+                -1.1920931797249069e-7,
+                -1.000000238418579,
+                0.0,
+                0.0,
+                1.000000238418579,
+                -1.1920931797249069e-7,
+                0.0,
+                0.0,
+                0.0,
+                -1.4901161193847657e-8,
+                1.0
+            ]
+        },
+        "87": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "10",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": false,
+                        "gravity": true,
+                        "block": 0
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "88": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "10",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "89": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "10",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "90": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "91": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "92": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "93": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "9",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "94": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "9",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "95": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "9",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "96": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "9",
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "97": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "9",
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "98": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "99": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "100": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "10",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "101": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "10",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "102": {
+            "name": "Melon",
+            "parent": "69",
+            "transformation": [
+                0.10000000149011612,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.10000000149011612,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.10000000149011612,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "box",
+                        "box": {
+                            "extents": [
+                                0.05000000074505806,
+                                0.05000000074505806,
+                                0.07000000029802323
+                            ]
+                        },
+                        "kinematic": true
+                    }
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "collider": "box",
+                        "box": {
+                            "extents": [
+                                0.05000000074505806,
+                                0.05000000074505806,
+                                0.07000000029802323
+                            ]
+                        },
+                        "groups": 1
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "type": "grabbable"
+                }
+            ]
+        },
+        "111": {
+            "link": {
+                "name": "Circle",
+                "file": "assets\\models\\melon.glb"
+            },
+            "parent": "102",
+            "transformation": [
+                1.0000001192092896,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0000001192092896,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0000001192092896,
+                0.0,
+                -0.4866013526916504,
+                -0.24378490447998048,
+                0.0,
+                1.0
+            ]
+        },
+        "112": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
+                1.0
+            ]
+        },
+        "113": {
+            "link": {
+                "name": "Circle",
+                "file": "assets\\models\\melon.glb"
+            },
+            "parent": "112",
+            "transformation": [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                -0.8977118134498596,
+                0.0,
+                -0.000972747802734375,
+                1.0
+            ]
+        },
+        "116": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
+                1.0
+            ],
+            "deleted": true
+        },
+        "117": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
+                1.0
+            ]
+        },
+        "118": {
+            "link": {
+                "name": "Circle",
+                "file": "assets\\models\\melon.glb"
+            },
+            "parent": "117",
+            "transformation": [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                -0.8977118134498596,
+                0.0,
+                -0.000972747802734375,
+                1.0
+            ]
+        },
+        "119": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
+                1.0
+            ]
+        },
+        "120": {
+            "link": {
+                "name": "Circle",
+                "file": "assets\\models\\melon.glb"
+            },
+            "parent": "119",
+            "transformation": [
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.0,
+                0.0,
+                -0.8977118134498596,
+                0.0,
+                -0.000972747802734375,
                 1.0
             ]
         }
@@ -1179,12 +2194,40 @@
             "link": {
                 "name": "Cylinder",
                 "file": "assets\\models\\target.glb"
-            }
+            },
+            "importScaling": 1.0,
+            "simplifyTarget": 0.5
         },
         "82": {
             "link": {
                 "name": "Cylinder",
                 "file": "assets\\models\\target_collision.glb"
+            },
+            "importScaling": 1.0,
+            "simplifyTarget": 0.5
+        },
+        "107": {
+            "link": {
+                "name": "Circle",
+                "file": "assets\\models\\melon.glb"
+            }
+        },
+        "108": {
+            "link": {
+                "name": "Circle.0",
+                "file": "assets\\models\\melon.glb"
+            }
+        },
+        "109": {
+            "link": {
+                "name": "Circle.1",
+                "file": "assets\\models\\melon.glb"
+            }
+        },
+        "110": {
+            "link": {
+                "name": "Circle.2",
+                "file": "assets\\models\\melon.glb"
             }
         }
     },
@@ -1338,6 +2381,54 @@
         "66": {
             "name": "Flat",
             "shader": "Flat"
+        },
+        "103": {
+            "link": {
+                "name": "Melon_Red",
+                "file": "assets\\models\\melon.glb"
+            },
+            "Phong": {
+                "ambientColor": [
+                    0.3647058606147766,
+                    0.06435985118150711,
+                    0.06435985118150711,
+                    1.0
+                ]
+            }
+        },
+        "104": {
+            "link": {
+                "name": "Melon_White",
+                "file": "assets\\models\\melon.glb"
+            },
+            "Phong": {
+                "ambientColor": [
+                    0.38823527097702029,
+                    0.3134947717189789,
+                    0.05937715619802475,
+                    1.0
+                ]
+            }
+        },
+        "105": {
+            "link": {
+                "name": "Melon_Green",
+                "file": "assets\\models\\melon.glb"
+            },
+            "Phong": {
+                "ambientColor": [
+                    0.07804269343614578,
+                    0.40784311294555666,
+                    0.07037292420864105,
+                    1.0
+                ]
+            }
+        },
+        "106": {
+            "link": {
+                "name": "Melon_Black",
+                "file": "assets\\models\\melon.glb"
+            }
         }
     },
     "shaders": {
@@ -1456,6 +2547,7 @@
         "assets/models/quest_controllers_credits_Jezza3D.glb",
         "assets/models/flatSphere.glb",
         "assets/models/target.glb",
-        "assets/models/target_collision.glb"
+        "assets/models/target_collision.glb",
+        "assets/models/melon.glb"
     ]
 }

@@ -4,7 +4,7 @@ WL.registerComponent('move_target', {
     init: function () {
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Target X", 0, 0.5, 4));
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Target Y", 0.5, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Target Z", -3, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Target Z", -4, 0.5, 4));
     },
     start: function () {
     },
