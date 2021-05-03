@@ -4,8 +4,9 @@ WL.registerComponent('grab', {
     _mySnapOnPivot: { type: WL.Type.Bool, default: false }
 }, {
     init: function () {
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Thres", 3, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 1, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Min Thres", 0.6, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max Thres", 2.5, 0.5, 4));
+        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 1.75, 0.5, 4));
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max", 15, 1, 4));
 
         this._myGamepad = null;
@@ -21,6 +22,8 @@ WL.registerComponent('grab', {
 
         this._myColliderComponent = this._myCollider.getComponent('collision');
 
+        this._myHandPose = new PP.HandPose(PP.InputUtils.getHandednessByIndex(this._myHandedness + 1));
+
         this._myGrabbed = null;
 
         this._myHistorySize = 5;
@@ -29,11 +32,11 @@ WL.registerComponent('grab', {
         this._myHistoryCurrentCount = 0;
 
         this._myGrabbedLinearVelocityHistory = new Array(this._myHistorySize);
-        this._myGrabbedLinearVelocityHistory.fill(0);
+        this._myGrabbedLinearVelocityHistory.fill([0, 0, 0]);
 
-        this._myThrowLinearStrengthMinThreshold = 2;
-        this._myThrowLinearStrengthMaxThreshold = 3;
-        this._myThrowLinearStrengthExtraPercentage = 1;
+        this._myThrowLinearStrengthMinThreshold = 0.6;
+        this._myThrowLinearStrengthMaxThreshold = 2.5;
+        this._myThrowLinearStrengthExtraPercentage = 1.75;
         this._myThrowLinearMaxStrength = 15;
 
         this._myThrowAngularStrengthDampingThreshold = 15;
@@ -42,12 +45,16 @@ WL.registerComponent('grab', {
 
     },
     start: function () {
+        this._myHandPose.start();
     },
     update: function (dt) {
+        this._myHandPose.update(dt);
+
         if (PP.RightGamepad.getButtonInfo(PP.ButtonType.SQUEEZE).isPressStart()) {
             this._mySnapOnPivot = !this._mySnapOnPivot;
         }
-        this._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Thres").myValue;
+        this._myThrowLinearStrengthMinThreshold = PP.EasyTuneVariables.get("Min Thres").myValue;
+        this._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Max Thres").myValue;
         this._myThrowLinearStrengthExtraPercentage = PP.EasyTuneVariables.get("Damp").myValue;
         this._myThrowLinearMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
 
@@ -73,11 +80,6 @@ WL.registerComponent('grab', {
                     break;
                 }
             }
-
-            if (this._myGrabbed) {
-                this._myHistoryCurrentCount = 0;
-                this._myGrabbedLinearVelocityHistory.fill(0);
-            }
         }
     },
     _grabEnd: function (e) {
@@ -96,19 +98,13 @@ WL.registerComponent('grab', {
         this._myGrabbed = null;
     },
     _updateVelocityHistory() {
-        this._myHistoryCurrentCount++;
-
-        this._myGrabbedLinearVelocityHistory.unshift(this._myGrabbed.myPhysx.linearVelocity.slice(0));
+        this._myGrabbedLinearVelocityHistory.unshift(this._myHandPose.getLinearVelocity().slice(0));
         this._myGrabbedLinearVelocityHistory.pop();
     },
     _computeReleaseLinearVelocity() {
-        if (this._myHistoryCurrentCount < this._myHistorySize) {
-            return this._myGrabbed.myPhysx.linearVelocity;
-        }
-
         //strength
         let strength = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
-        //let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
+        let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
         for (let i = 1; i < this._myHistoryStrengthAverageFromStart; i++) {
             strength += glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[i]);
         }
@@ -122,7 +118,7 @@ WL.registerComponent('grab', {
         strength += strength * this._myThrowLinearStrengthExtraPercentage * strengthMultiplierIntensity;
         strength = Math.min(strength, this._myThrowLinearMaxStrength);
 
-        //console.log(strength2, " - ", strength);
+        console.log(strength2.toFixed(4), " - ", strength.toFixed(4));
         //console.log(strength.toFixed(4));
 
         //direction
@@ -143,8 +139,8 @@ WL.registerComponent('grab', {
     },
     _computeReleaseAngularVelocity() {
         //strength
-        let strength = glMatrix.vec3.length(this._myGrabbed.myPhysx.angularVelocity);
-        //let strength2 = glMatrix.vec3.length(this._myGrabbed.myPhysx.angularVelocity);
+        let strength = glMatrix.vec3.length(this._myHandPose.getAngularVelocity());
+        //let strength2 = glMatrix.vec3.length(this._myHandPose.getAngularVelocity());
 
         if (strength > this._myThrowAngularStrengthDampingThreshold) {
             strength = this._myThrowAngularStrengthDampingThreshold + (strength - this._myThrowAngularStrengthDampingThreshold) * this._myThrowAngularStrengthDamping;
@@ -156,7 +152,7 @@ WL.registerComponent('grab', {
         //console.log(strength.toFixed(4));
 
         //direction
-        let direction = this._myGrabbed.myPhysx.angularVelocity.slice(0);
+        let direction = this._myHandPose.getAngularVelocity().slice(0);
         glMatrix.vec3.normalize(direction, direction);
 
         glMatrix.vec3.scale(direction, direction, strength);

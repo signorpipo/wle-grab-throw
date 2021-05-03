@@ -55,32 +55,44 @@ PP.HandPose = class HandPose {
         if (xrFrame && this._myInputSource) {
             let xrPose = xrFrame.getPose(this._myInputSource.gripSpace, this._myReferenceSpace);
 
-            this._myPosition[0] = xrPose.transform.position.x;
-            this._myPosition[1] = xrPose.transform.position.y;
-            this._myPosition[2] = xrPose.transform.position.z;
+            if (xrPose) {
+                this._myPosition[0] = xrPose.transform.position.x;
+                this._myPosition[1] = xrPose.transform.position.y;
+                this._myPosition[2] = xrPose.transform.position.z;
 
-            this._myRotation[0] = xrPose.transform.orientation.x;
-            this._myRotation[1] = xrPose.transform.orientation.y;
-            this._myRotation[2] = xrPose.transform.orientation.z;
+                this._myRotation[0] = xrPose.transform.orientation.x;
+                this._myRotation[1] = xrPose.transform.orientation.y;
+                this._myRotation[2] = xrPose.transform.orientation.z;
 
-            if (xrPose.linearVelocity) {
-                this._myLinearVelocity[0] = xrPose.linearVelocity.x;
-                this._myLinearVelocity[1] = xrPose.linearVelocity.y;
-                this._myLinearVelocity[2] = xrPose.linearVelocity.z;
+                if (xrPose.linearVelocity) {
+                    this._myLinearVelocity[0] = xrPose.linearVelocity.x;
+                    this._myLinearVelocity[1] = xrPose.linearVelocity.y;
+                    this._myLinearVelocity[2] = xrPose.linearVelocity.z;
+                } else {
+                    this._myLinearVelocity[0] = 0;
+                    this._myLinearVelocity[1] = 0;
+                    this._myLinearVelocity[2] = 0;
+                }
+
+                if (xrPose.angularVelocity) {
+                    this._myAngularVelocity[0] = xrPose.angularVelocity.x;
+                    this._myAngularVelocity[1] = xrPose.angularVelocity.y;
+                    this._myAngularVelocity[2] = xrPose.angularVelocity.z;
+                } else {
+                    this._myAngularVelocity[0] = 0;
+                    this._myAngularVelocity[1] = 0;
+                    this._myAngularVelocity[2] = 0;
+                }
             } else {
-                this._myLinearVelocity[0] = 0;
-                this._myLinearVelocity[1] = 0;
-                this._myLinearVelocity[2] = 0;
-            }
+                //keep previous position and rotation but reset velocity because reasons
 
-            if (xrPose.angularVelocity) {
-                this._myAngularVelocity[0] = xrPose.angularVelocity.x;
-                this._myAngularVelocity[1] = xrPose.angularVelocity.y;
-                this._myAngularVelocity[2] = xrPose.angularVelocity.z;
-            } else {
                 this._myAngularVelocity[0] = 0;
                 this._myAngularVelocity[1] = 0;
                 this._myAngularVelocity[2] = 0;
+
+                this._myLinearVelocity[0] = 0;
+                this._myLinearVelocity[1] = 0;
+                this._myLinearVelocity[2] = 0;
             }
         }
     }
