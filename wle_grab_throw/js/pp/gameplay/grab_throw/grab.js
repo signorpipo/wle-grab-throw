@@ -56,7 +56,7 @@ WL.registerComponent('grab', {
             let collidingComps = this._myColliderComponent.queryOverlaps();
             for (let i = 0; i < collidingComps.length; i++) {
                 let grabbable = collidingComps[i].object.getComponent("grabbable");
-                if (grabbable) {
+                if (grabbable && !grabbable.myIsGrabbed) {
                     this._myGrabbed = grabbable;
                     this._myGrabbed.grab(this.object);
                     break;
