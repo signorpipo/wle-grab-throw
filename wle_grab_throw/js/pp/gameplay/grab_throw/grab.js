@@ -56,9 +56,10 @@ WL.registerComponent('grab', {
             let collidingComps = this._myColliderComponent.queryOverlaps();
             for (let i = 0; i < collidingComps.length; i++) {
                 let grabbable = collidingComps[i].object.getComponent("grabbable");
-                if (grabbable && !grabbable.myIsGrabbed) {
+                if (grabbable) {
                     this._myGrabbed = grabbable;
                     this._myGrabbed.grab(this.object);
+                    this._myGrabbed.registerUngrabEventListener(this, this._onUngrab.bind(this));
                     break;
                 }
             }
@@ -71,12 +72,18 @@ WL.registerComponent('grab', {
     },
     _grabEnd: function (e) {
         if (this._myGrabbed) {
+            this._myGrabbed.unregisterUngrabEventListener(this);
+
             let linearVelocity = this._computeReleaseLinearVelocity();
             let angularVelocity = this._computeReleaseAngularVelocity();
 
             this._myGrabbed.release(linearVelocity, angularVelocity);
             this._myGrabbed = null;
         }
+    },
+    _onUngrab() {
+        this._myGrabbed.unregisterUngrabEventListener(this);
+        this._myGrabbed = null;
     },
     _updateVelocityHistory() {
         this._myHistoryCurrentCount++;

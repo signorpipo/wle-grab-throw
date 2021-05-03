@@ -1057,8 +1057,8 @@
                         "_myObject8": "100",
                         "_myObject9": "101",
                         "_myObject10": "112",
-                        "_myObject11": "117",
-                        "_myObject12": "119"
+                        "_myObject11": "122",
+                        "_myObject12": "123"
                     }
                 }
             ],
@@ -1863,6 +1863,38 @@
                 },
                 {
                     "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "mesh": {
+                        "material": "103",
+                        "mesh": "107"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "104",
+                        "mesh": "108"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "105",
+                        "mesh": "109"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "106",
+                        "mesh": "110"
+                    },
+                    "type": "mesh",
+                    "imported": true
                 }
             ],
             "transformation": [
@@ -1907,7 +1939,8 @@
                 0.0,
                 -0.000972747802734375,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "116": {
             "name": "Mesh.000",
@@ -1980,7 +2013,8 @@
                 0.0,
                 2.384185791015625e-7,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "118": {
             "link": {
@@ -2005,7 +2039,8 @@
                 0.0,
                 -0.000972747802734375,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "119": {
             "name": "Mesh.000",
@@ -2041,7 +2076,8 @@
                 0.0,
                 2.384185791015625e-7,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "120": {
             "link": {
@@ -2066,7 +2102,8 @@
                 0.0,
                 -0.000972747802734375,
                 1.0
-            ]
+            ],
+            "deleted": true
         },
         "121": {
             "name": "Grab Collision",
@@ -2098,6 +2135,142 @@
                 -0.009999999776482582,
                 -0.00800000037997961,
                 -0.03999999910593033,
+                1.0
+            ]
+        },
+        "122": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "mesh": {
+                        "material": "103",
+                        "mesh": "107"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "104",
+                        "mesh": "108"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "105",
+                        "mesh": "109"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "106",
+                        "mesh": "110"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
+                1.0
+            ]
+        },
+        "123": {
+            "name": "Mesh.000",
+            "parent": "86",
+            "components": [
+                {
+                    "type": "physx",
+                    "physx": {
+                        "sphere": {
+                            "radius": 0.05000000074505806
+                        },
+                        "trigger": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "mesh": {
+                        "material": "103",
+                        "mesh": "107"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "104",
+                        "mesh": "108"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "105",
+                        "mesh": "109"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                },
+                {
+                    "mesh": {
+                        "material": "106",
+                        "mesh": "110"
+                    },
+                    "type": "mesh",
+                    "imported": true
+                }
+            ],
+            "transformation": [
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                2.384185791015625e-7,
                 1.0
             ]
         }
