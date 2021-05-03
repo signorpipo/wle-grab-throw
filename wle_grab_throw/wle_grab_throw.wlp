@@ -571,7 +571,9 @@
                 {
                     "type": "spawn-grabbable",
                     "spawn-grabbable": {
-                        "_myObject": "76"
+                        "_myObject": "76",
+                        "_myObject1": "70",
+                        "_myObject2": "76"
                     }
                 }
             ]
@@ -592,7 +594,7 @@
                     "type": "collision",
                     "collision": {
                         "sphere": {
-                            "radius": 0.07000000029802323
+                            "radius": 0.05999999865889549
                         },
                         "groups": 1
                     },
@@ -606,28 +608,31 @@
                     "physx": {
                         "kinematic": true,
                         "sphere": {
-                            "radius": 0.07000000029802323
+                            "radius": 0.05999999865889549
                         },
                         "static": false
                     },
-                    "active": false
+                    "active": true
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
                 }
             ],
             "transformation": [
-                0.07000000029802323,
+                0.05999999865889549,
                 0.0,
                 0.0,
                 0.0,
                 0.0,
-                0.07000000029802323,
+                0.05999999865889549,
                 0.0,
                 0.0,
                 0.0,
                 0.0,
-                0.07000000029802323,
+                0.05999999865889549,
                 0.0,
                 0.0,
-                -2000.0,
+                0.0,
                 0.0,
                 1.0
             ]
@@ -764,8 +769,8 @@
                         "shape": "box",
                         "box": {
                             "extents": [
-                                0.10000000149011612,
                                 0.07000000029802323,
+                                0.05000000074505806,
                                 0.019999999552965165
                             ]
                         },
@@ -782,22 +787,25 @@
                         "collider": "box",
                         "box": {
                             "extents": [
-                                0.10000000149011612,
                                 0.07000000029802323,
+                                0.05000000074505806,
                                 0.019999999552965165
                             ]
                         },
                         "groups": 1
                     }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
                 }
             ],
             "transformation": [
-                0.10000000149011612,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
                 0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
                 0.0,
                 0.0,
                 0.0,
@@ -926,6 +934,9 @@
                         "static": false,
                         "kinematic": true
                     }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
                 }
             ]
         },
@@ -1032,7 +1043,7 @@
                 0.0,
                 0.0,
                 0.0,
-                -0.15000000596046449,
+                -0.18613386154174806,
                 1.0
             ]
         }
@@ -1436,7 +1447,7 @@
             "enable": true
         },
         "runtime": {
-            "visualizeColliders": true
+            "visualizeColliders": false
         }
     },
     "animations": {},

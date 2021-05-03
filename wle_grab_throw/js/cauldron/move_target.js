@@ -10,6 +10,5 @@ WL.registerComponent('move_target', {
     },
     update: function (dt) {
         this.object.setTranslationLocal([PP.EasyTuneVariables.get("Target X").myValue, PP.EasyTuneVariables.get("Target Y").myValue, PP.EasyTuneVariables.get("Target Z").myValue]);
-        this._myPhysx.scalingWorld;
     },
 });
