@@ -357,13 +357,6 @@
                         "_myTextMaterial": "DefaultFontMaterial"
                     },
                     "active": true
-                },
-                {
-                    "type": "grab",
-                    "grab": {
-                        "_myCollider": "121",
-                        "_mySnapOnPivot": false
-                    }
                 }
             ],
             "name": "Hand Left"
@@ -466,16 +459,6 @@
                         "_myCursorMesh": "9",
                         "_myCursorMaterial": "66",
                         "_myShowFingerCursor": false
-                    }
-                },
-                {
-                    "type": "grab",
-                    "grab": {
-                        "_myHandedness": "right",
-                        "_myCollider": "73",
-                        "_myThrowStrengthMultiplier": 2,
-                        "_myThrowStrengthExtraPercentage": 0.4000000059604645,
-                        "_mySnapOnPivot": false
                     }
                 }
             ],
@@ -584,7 +567,9 @@
                         "_myObject": "76",
                         "_myObject1": "70",
                         "_myObject2": "76",
-                        "_myObject3": "102"
+                        "_myObject3": "102",
+                        "_myObject4": "128",
+                        "_myObject5": "129"
                     }
                 }
             ]
@@ -667,6 +652,16 @@
                             "radius": 0.05999999865889549
                         },
                         "groups": 1
+                    }
+                },
+                {
+                    "type": "grab",
+                    "grab": {
+                        "_myHandedness": "right",
+                        "_myCollider": "73",
+                        "_myThrowStrengthMultiplier": 2,
+                        "_myThrowStrengthExtraPercentage": 0.4000000059604645,
+                        "_mySnapOnPivot": false
                     }
                 }
             ],
@@ -2119,6 +2114,13 @@
                         },
                         "groups": 1
                     }
+                },
+                {
+                    "type": "grab",
+                    "grab": {
+                        "_myCollider": "121",
+                        "_mySnapOnPivot": false
+                    }
                 }
             ],
             "transformation": [
@@ -2273,6 +2275,323 @@
                 0.0,
                 0.0,
                 2.384185791015625e-7,
+                1.0
+            ]
+        },
+        "124": {
+            "name": "Sphere",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "71",
+                        "material": "34"
+                    },
+                    "active": true
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.05999999865889549
+                        },
+                        "groups": 1
+                    },
+                    "active": true
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "kinematic": true,
+                        "sphere": {
+                            "radius": 0.05999999865889549
+                        },
+                        "static": false
+                    },
+                    "active": true
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "125": {
+            "name": "Cube",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.05000000074505806,
+                                0.019999999552965165
+                            ]
+                        },
+                        "kinematic": true
+                    },
+                    "active": true
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "collider": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.05000000074505806,
+                                0.019999999552965165
+                            ]
+                        },
+                        "groups": 1
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                }
+            ],
+            "transformation": [
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.019999999552965165,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "deleted": true
+        },
+        "126": {
+            "name": "Spawn Grabbable",
+            "parent": "32",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.3499999940395355,
+                -0.4000000059604645,
+                -0.5,
+                1.0
+            ],
+            "components": [
+                {
+                    "type": "spawn-grabbable",
+                    "spawn-grabbable": {
+                        "_myObject": "76",
+                        "_myObject1": "70",
+                        "_myObject2": "76",
+                        "_myObject3": "102",
+                        "_myObject4": "124",
+                        "_myObject5": "125"
+                    }
+                }
+            ]
+        },
+        "127": {
+            "name": "Spawn Grabbable",
+            "parent": "32",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.3499999940395355,
+                -0.4000000059604645,
+                -0.5,
+                1.0
+            ],
+            "components": [
+                {
+                    "type": "spawn-grabbable",
+                    "spawn-grabbable": {
+                        "_myObject": "76",
+                        "_myObject1": "70",
+                        "_myObject2": "76",
+                        "_myObject3": "102",
+                        "_myObject4": "124",
+                        "_myObject5": "125"
+                    }
+                }
+            ]
+        },
+        "128": {
+            "name": "Sphere 2",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "71",
+                        "material": "34"
+                    }
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "kinematic": true,
+                        "sphere": {
+                            "radius": 0.05999999865889549
+                        }
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "sphere": {
+                            "radius": 0.05999999865889549
+                        },
+                        "groups": 1
+                    }
+                }
+            ],
+            "transformation": [
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05999999865889549,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "129": {
+            "name": "Cube 2",
+            "parent": "69",
+            "components": [
+                {
+                    "type": "mesh",
+                    "mesh": {
+                        "mesh": "8",
+                        "material": "35"
+                    }
+                },
+                {
+                    "type": "grabbable"
+                },
+                {
+                    "type": "physx",
+                    "physx": {
+                        "shape": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.05000000074505806,
+                                0.019999999552965165
+                            ]
+                        },
+                        "kinematic": true
+                    }
+                },
+                {
+                    "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "type": "collision",
+                    "collision": {
+                        "collider": "box",
+                        "box": {
+                            "extents": [
+                                0.07000000029802323,
+                                0.05000000074505806,
+                                0.019999999552965165
+                            ]
+                        },
+                        "groups": 1
+                    }
+                }
+            ],
+            "transformation": [
+                0.07000000029802323,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.05000000074505806,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.019999999552965165,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
                 1.0
             ]
         }

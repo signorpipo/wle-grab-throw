@@ -84,7 +84,7 @@ WL.registerComponent('spawn-particles', {
             }
         }
 
-        if (this._mySpawn || PP.RightGamepad.getButtonInfo(PP.ButtonType.TOP_BUTTON).isPressEnd()) {
+        if (this._mySpawn) {
             this._myCount = 0;
             this._mySpawned = true;
             this._mySpawn = false;

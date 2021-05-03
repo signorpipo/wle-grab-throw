@@ -104,7 +104,7 @@ WL.registerComponent('grab', {
     _computeReleaseLinearVelocity() {
         //strength
         let strength = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
-        let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
+        //let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
         for (let i = 1; i < this._myHistoryStrengthAverageFromStart; i++) {
             strength += glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[i]);
         }
@@ -118,7 +118,7 @@ WL.registerComponent('grab', {
         strength += strength * this._myThrowLinearStrengthExtraPercentage * strengthMultiplierIntensity;
         strength = Math.min(strength, this._myThrowLinearMaxStrength);
 
-        console.log(strength2.toFixed(4), " - ", strength.toFixed(4));
+        //console.log(strength2.toFixed(4), " - ", strength.toFixed(4));
         //console.log(strength.toFixed(4));
 
         //direction
