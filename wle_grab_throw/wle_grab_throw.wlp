@@ -151,6 +151,9 @@
                     "input": {
                         "type": "eye right"
                     }
+                },
+                {
+                    "type": "howler-audio-listener"
                 }
             ],
             "transformation": [
@@ -312,6 +315,15 @@
             "components": [
                 {
                     "type": "gamepads-manager"
+                },
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "spatial": false,
+                        "loop": true,
+                        "autoplay": true,
+                        "src": "assets/sound/music/ambient.mp3"
+                    }
                 }
             ]
         },
@@ -357,13 +369,6 @@
                         "_myTextMaterial": "DefaultFontMaterial"
                     },
                     "active": true
-                },
-                {
-                    "type": "grab",
-                    "grab": {
-                        "_myCollider": "121",
-                        "_mySnapOnPivot": false
-                    }
                 }
             ],
             "name": "Hand Left"
@@ -466,16 +471,6 @@
                         "_myCursorMesh": "9",
                         "_myCursorMaterial": "66",
                         "_myShowFingerCursor": false
-                    }
-                },
-                {
-                    "type": "grab",
-                    "grab": {
-                        "_myHandedness": "right",
-                        "_myCollider": "73",
-                        "_myThrowStrengthMultiplier": 2,
-                        "_myThrowStrengthExtraPercentage": 0.4000000059604645,
-                        "_mySnapOnPivot": false
                     }
                 }
             ],
@@ -669,6 +664,16 @@
                             "radius": 0.05999999865889549
                         },
                         "groups": 1
+                    }
+                },
+                {
+                    "type": "grab",
+                    "grab": {
+                        "_myHandedness": "right",
+                        "_myCollider": "73",
+                        "_myThrowStrengthMultiplier": 2,
+                        "_myThrowStrengthExtraPercentage": 0.4000000059604645,
+                        "_mySnapOnPivot": false
                     }
                 }
             ],
@@ -1072,12 +1077,12 @@
                 0.0,
                 0.0,
                 0.0,
-                -1.1920922560193503e-7,
-                -0.9999994039535523,
+                -1.1920922560193505e-7,
+                -0.9999994039535524,
                 0.0,
                 0.0,
-                0.9999994039535523,
-                -1.1920922560193503e-7,
+                0.9999994039535524,
+                -1.1920922560193505e-7,
                 0.0,
                 0.0,
                 -0.5,
@@ -2121,6 +2126,13 @@
                         },
                         "groups": 1
                     }
+                },
+                {
+                    "type": "grab",
+                    "grab": {
+                        "_myCollider": "121",
+                        "_mySnapOnPivot": false
+                    }
                 }
             ],
             "transformation": [
@@ -2938,7 +2950,7 @@
             },
             "Phong": {
                 "ambientColor": [
-                    0.38823527097702029,
+                    0.3882352709770203,
                     0.3134947717189789,
                     0.05937715619802475,
                     1.0
