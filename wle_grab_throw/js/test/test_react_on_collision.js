@@ -24,7 +24,7 @@ WL.registerComponent('test-react-on-collision', {
         }
     },
     _onCollision() {
-        PP.RightGamepad.pulse(0.5, 0.5);
+        //PP.RightGamepad.pulse(0.5, 0.5);
         this._mySpawner.spawn();
         this._myCollisionOn = true;
     }
