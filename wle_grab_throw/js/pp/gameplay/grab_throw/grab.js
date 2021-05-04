@@ -90,22 +90,16 @@ WL.registerComponent('grab', {
     _computeReleaseLinearVelocity() {
         //strength
         let strength = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
-        //let strength2 = glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[0]);
         for (let i = 1; i < this._myHistoryStrengthAverageFromStart; i++) {
             strength += glMatrix.vec3.length(this._myGrabbedLinearVelocityHistory[i]);
         }
         strength /= this._myHistoryStrengthAverageFromStart;
-        //console.log(this._myGrabbedLinearVelocityHistory.slice(0, this._myHistoryStrengthAverageFromStart).map(function (a) { return glMatrix.vec3.length(a); }));
-        //console.log(strength2, " - ", strength);
 
         let strengthMultiplierIntensity = (strength - this._myThrowLinearStrengthMinThreshold) / (this._myThrowLinearStrengthMaxThreshold - this._myThrowLinearStrengthMinThreshold); //linear equation
         strengthMultiplierIntensity = Math.min(1, Math.max(0, strengthMultiplierIntensity));
 
         strength += strength * this._myThrowLinearStrengthExtraPercentage * strengthMultiplierIntensity;
         strength = Math.min(strength, this._myThrowLinearMaxStrength);
-
-        //console.log(strength2.toFixed(4), " - ", strength.toFixed(4));
-        //console.log(strength.toFixed(4));
 
         //direction
         let directionCurrentWeight = this._myHistoryDirectionAverageFromEnd;
@@ -126,16 +120,12 @@ WL.registerComponent('grab', {
     _computeReleaseAngularVelocity() {
         //strength
         let strength = glMatrix.vec3.length(this._myHandPose.getAngularVelocity());
-        //let strength2 = glMatrix.vec3.length(this._myHandPose.getAngularVelocity());
 
         if (strength > this._myThrowAngularStrengthDampingThreshold) {
             strength = this._myThrowAngularStrengthDampingThreshold + (strength - this._myThrowAngularStrengthDampingThreshold) * this._myThrowAngularStrengthDamping;
         }
 
         strength = Math.min(strength, this._myThrowAngularMaxStrength);
-
-        //console.log(strength2, " - ", strength);
-        //console.log(strength.toFixed(4));
 
         //direction
         let direction = this._myHandPose.getAngularVelocity().slice(0);
