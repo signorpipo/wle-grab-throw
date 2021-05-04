@@ -34,7 +34,6 @@ WL.registerComponent('spawn-particles', {
             object.resetTranslationRotation();
             this._myPhysxList.push(object.getComponent('physx'));
             this._myPhysxList[i].kinematic = false;
-            this._myPhysxList[i].addForce([0, -200, 0]);
         }
 
         this._mySpawn = false;
