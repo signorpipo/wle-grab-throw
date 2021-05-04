@@ -12,7 +12,7 @@ WL.registerComponent('grab-extra', {
     },
     update: function (dt) {
 
-        if (PP.RightGamepad.getButtonInfo(PP.ButtonType.SQUEEZE).isPressStart()) {
+        if (PP.RightGamepad.getButtonInfo(PP.ButtonType.TOP_BUTTON).isPressStart()) {
             this._myGrab._mySnapOnPivot = !this._myGrab._mySnapOnPivot;
         }
         this._myGrab._myThrowLinearStrengthMinThreshold = PP.EasyTuneVariables.get("Min Thres").myValue;

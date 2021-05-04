@@ -22,6 +22,9 @@ WL.registerComponent('spawn-particles', {
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Par Max Scale", 0.075, 0.01, 4));
     },
     start: function () {
+        this._myAudio = this.object.addComponent("howler-audio-source", { "src": "assets/sound/sfx/strike.mp3" });
+        //this._myAudio.spatial = false;
+
         this._myObjectList = [this._myObject1, this._myObject2, this._myObject3, this._myObject4, this._myObject5, this._myObject6, this._myObject7, this._myObject8, this._myObject9,
         this._myObject10, this._myObject11, this._myObject12];
         this._myPhysxList = [];
@@ -85,6 +88,10 @@ WL.registerComponent('spawn-particles', {
         }
 
         if (this._mySpawn) {
+            let pitch = Math.random() * (1.5 - 0.75) + 0.75;
+            this._myAudio.audio._pannerAttr.refDistance = 3;
+            this._myAudio.audio.rate(pitch);
+            this._myAudio.play();
             this._myCount = 0;
             this._mySpawned = true;
             this._mySpawn = false;

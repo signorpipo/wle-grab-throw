@@ -1,9 +1,13 @@
 WL.registerComponent('grab', {
     _myHandedness: { type: WL.Type.Enum, values: ['left', 'right'], default: 'left' },
-    _myCollider: { type: WL.Type.Object },
     _mySnapOnPivot: { type: WL.Type.Bool, default: false }
 }, {
     init: function () {
+
+        this._myHandPose = new PP.HandPose(PP.InputUtils.getHandednessByIndex(this._myHandedness + 1));
+
+        this._myGrabbed = null;
+
         this._myGamepad = null;
 
         if (this._myHandedness + 1 == PP.HandednessIndex.LEFT) {
@@ -12,14 +16,8 @@ WL.registerComponent('grab', {
             this._myGamepad = PP.RightGamepad;
         }
 
-        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_START, this, this._grabStart.bind(this));
-        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_END, this, this._grabEnd.bind(this));
-
-        this._myColliderComponent = this._myCollider.getComponent('collision');
-
-        this._myHandPose = new PP.HandPose(PP.InputUtils.getHandednessByIndex(this._myHandedness + 1));
-
-        this._myGrabbed = null;
+        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_START, this, this._grab.bind(this));
+        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_END, this, this._throw.bind(this));
 
         this._myHistorySize = 5;
         this._myHistoryStrengthAverageFromStart = 1;
@@ -38,8 +36,11 @@ WL.registerComponent('grab', {
         this._myThrowAngularStrengthDamping = 0.1;
         this._myThrowAngularMaxStrength = 23;
 
+        this._myGrabCallbacks = new Map();
+        this._myThrowCallbacks = new Map();
     },
     start: function () {
+        this._myCollision = this.object.getComponent('collision');
         this._myHandPose.start();
     },
     update: function (dt) {
@@ -49,9 +50,21 @@ WL.registerComponent('grab', {
             this._updateVelocityHistory();
         }
     },
-    _grabStart: function (e) {
+    registerGrabEventListener(id, callback) {
+        this._myGrabCallbacks.set(id, callback);
+    },
+    unregisterGrabEventListener(id) {
+        this._myGrabCallbacks.delete(id);
+    },
+    registerThrowEventListener(id, callback) {
+        this._myThrowCallbacks.set(id, callback);
+    },
+    unregisterThrowEventListener(id) {
+        this._myThrowCallbacks.delete(id);
+    },
+    _grab: function (e) {
         if (!this._myGrabbed) {
-            let collidingComps = this._myColliderComponent.queryOverlaps();
+            let collidingComps = this._myCollision.queryOverlaps();
             for (let i = 0; i < collidingComps.length; i++) {
                 let grabbable = collidingComps[i].object.getComponent("grabbable");
                 if (grabbable) {
@@ -63,19 +76,24 @@ WL.registerComponent('grab', {
                         this._myGrabbed.object.resetTranslation();
                     }
 
+                    this._myGrabCallbacks.forEach(function (value) { value(this, this._myGrabbed); }.bind(this));
+
                     break;
                 }
             }
         }
     },
-    _grabEnd: function (e) {
+    _throw: function (e) {
         if (this._myGrabbed) {
             this._myGrabbed.unregisterUngrabEventListener(this);
 
             let linearVelocity = this._computeReleaseLinearVelocity();
             let angularVelocity = this._computeReleaseAngularVelocity();
 
-            this._myGrabbed.release(linearVelocity, angularVelocity);
+            this._myGrabbed.throw(linearVelocity, angularVelocity);
+
+            this._myThrowCallbacks.forEach(function (value) { value(this, this._myGrabbed, linearVelocity, angularVelocity); }.bind(this));
+
             this._myGrabbed = null;
         }
     },

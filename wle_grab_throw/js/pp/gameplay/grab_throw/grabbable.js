@@ -1,12 +1,20 @@
 WL.registerComponent('grabbable', {
 }, {
     init: function () {
-        this.myPhysx = this.object.getComponent('physx');
         this.myIsGrabbed = false;
 
         this._myOldParent = this.object.parent;
 
         this._myUngrabCallbacks = new Map();
+    },
+    start: function () {
+        this.myPhysx = this.object.getComponent('physx');
+    },
+    registerUngrabEventListener(id, callback) {
+        this._myUngrabCallbacks.set(id, callback);
+    },
+    unregisterUngrabEventListener(id) {
+        this._myUngrabCallbacks.delete(id);
     },
     grab: function (grabber) {
         if (this.myIsGrabbed) {
@@ -20,7 +28,7 @@ WL.registerComponent('grabbable', {
 
         this.myIsGrabbed = true;
     },
-    release: function (linearVelocity, angularVelocity) {
+    throw: function (linearVelocity, angularVelocity) {
         if (this.myIsGrabbed) {
             PP.ObjectUtils.reparentKeepTransform(this.object, this._myOldParent);
             this.myIsGrabbed = false;
@@ -35,11 +43,5 @@ WL.registerComponent('grabbable', {
 
         this.myIsGrabbed = false;
         PP.ObjectUtils.reparentKeepTransform(this.object, this._myOldParent);
-    },
-    registerUngrabEventListener(id, callback) {
-        this._myUngrabCallbacks.set(id, callback);
-    },
-    unregisterUngrabEventListener(id) {
-        this._myUngrabCallbacks.delete(id);
     }
 });

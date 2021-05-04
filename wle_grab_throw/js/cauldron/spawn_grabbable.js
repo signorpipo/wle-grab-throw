@@ -42,7 +42,7 @@ WL.registerComponent('spawn-grabbable', {
             this._myCurrentObject.getTranslationWorld(currentTranslation);
             this.object.getTranslationWorld(objectTranslation);
 
-            if (glMatrix.vec3.distance(currentTranslation, objectTranslation) > 0.1) {
+            if (glMatrix.vec3.distance(currentTranslation, objectTranslation) > 0.25) {
                 this._selectObject();
             }
         }
@@ -62,5 +62,10 @@ WL.registerComponent('spawn-grabbable', {
         this._myCurrentObject.resetTranslationRotation();
         this._myCurrentObject.setTranslationLocal([0, 0, 0]);
         this._myCurrentObject.getComponent("physx").kinematic = true;
+
+        let sfx = this._myCurrentObject.getComponent("on-collision-sfx");
+        if (sfx) {
+            sfx._myTime = 0;
+        }
     }
 });

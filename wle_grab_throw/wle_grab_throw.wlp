@@ -628,6 +628,9 @@
                 },
                 {
                     "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "type": "on-collision-sfx"
                 }
             ],
             "transformation": [
@@ -682,6 +685,13 @@
                 },
                 {
                     "type": "grab-extra"
+                },
+                {
+                    "type": "grab-sfx",
+                    "grab-sfx": {
+                        "_myGrabSFX": "136",
+                        "_myThrowSFX": "137"
+                    }
                 }
             ],
             "transformation": [
@@ -755,7 +765,8 @@
                     "physx": {
                         "shape": "plane",
                         "static": true
-                    }
+                    },
+                    "active": true
                 }
             ],
             "transformation": [
@@ -822,6 +833,9 @@
                 },
                 {
                     "type": "fix-physx-kinematic-parent"
+                },
+                {
+                    "type": "on-collision-sfx"
                 }
             ],
             "transformation": [
@@ -1836,6 +1850,9 @@
                 },
                 {
                     "type": "grabbable"
+                },
+                {
+                    "type": "on-collision-sfx"
                 }
             ]
         },
@@ -2143,6 +2160,13 @@
                 },
                 {
                     "type": "grab-extra"
+                },
+                {
+                    "type": "grab-sfx",
+                    "grab-sfx": {
+                        "_myGrabSFX": "131",
+                        "_myThrowSFX": "132"
+                    }
                 }
             ],
             "transformation": [
@@ -2533,6 +2557,9 @@
                         },
                         "groups": 1
                     }
+                },
+                {
+                    "type": "on-collision-sfx"
                 }
             ],
             "transformation": [
@@ -2598,6 +2625,9 @@
                         },
                         "groups": 1
                     }
+                },
+                {
+                    "type": "on-collision-sfx"
                 }
             ],
             "transformation": [
@@ -2618,6 +2648,104 @@
                 0.0,
                 1.0
             ]
+        },
+        "130": {
+            "name": "SFX",
+            "parent": "121"
+        },
+        "131": {
+            "name": "Grab",
+            "parent": "130",
+            "components": [
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "src": "assets/sound/sfx/grab.mp3"
+                    }
+                }
+            ]
+        },
+        "132": {
+            "name": "Throw",
+            "parent": "130",
+            "components": [
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "src": "assets/sound/sfx/throw.mp3"
+                    }
+                }
+            ]
+        },
+        "133": {
+            "name": "SFX",
+            "parent": "121",
+            "deleted": true
+        },
+        "134": {
+            "name": "Grab",
+            "parent": "133",
+            "components": [
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "src": "assets/sound/sfx/grab.mp3"
+                    }
+                }
+            ],
+            "deleted": true
+        },
+        "135": {
+            "name": "SFX",
+            "parent": "73",
+            "transformation": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        "136": {
+            "name": "Grab",
+            "parent": "135",
+            "components": [
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "src": "assets/sound/sfx/grab.mp3"
+                    }
+                }
+            ]
+        },
+        "137": {
+            "name": "Throw",
+            "parent": "135",
+            "components": [
+                {
+                    "type": "howler-audio-source",
+                    "howler-audio-source": {
+                        "src": "assets/sound/sfx/throw.mp3",
+                        "volume": 1.0
+                    }
+                }
+            ]
+        },
+        "138": {
+            "name": "SFX",
+            "parent": "32",
+            "deleted": true
         }
     },
     "meshes": {
