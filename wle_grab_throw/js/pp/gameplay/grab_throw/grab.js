@@ -4,11 +4,6 @@ WL.registerComponent('grab', {
     _mySnapOnPivot: { type: WL.Type.Bool, default: false }
 }, {
     init: function () {
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Min Thres", 0.6, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max Thres", 2.5, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Damp", 1.75, 0.5, 4));
-        PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Max", 15, 1, 4));
-
         this._myGamepad = null;
 
         if (this._myHandedness + 1 == PP.HandednessIndex.LEFT) {
@@ -50,14 +45,6 @@ WL.registerComponent('grab', {
     update: function (dt) {
         this._myHandPose.update(dt);
 
-        if (PP.RightGamepad.getButtonInfo(PP.ButtonType.SQUEEZE).isPressStart()) {
-            this._mySnapOnPivot = !this._mySnapOnPivot;
-        }
-        this._myThrowLinearStrengthMinThreshold = PP.EasyTuneVariables.get("Min Thres").myValue;
-        this._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Max Thres").myValue;
-        this._myThrowLinearStrengthExtraPercentage = PP.EasyTuneVariables.get("Damp").myValue;
-        this._myThrowLinearMaxStrength = PP.EasyTuneVariables.get("Max").myValue;
-
         if (this._myGrabbed) {
             this._updateVelocityHistory();
         }
@@ -74,7 +61,6 @@ WL.registerComponent('grab', {
 
                     if (this._mySnapOnPivot) {
                         this._myGrabbed.object.resetTranslation();
-                        this._myGrabbed.object.setTranslationLocal([0.001, 0.001, 0.001]); //helps a bit with gaining more speed
                     }
 
                     break;

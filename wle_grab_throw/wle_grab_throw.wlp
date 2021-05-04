@@ -324,6 +324,10 @@
                         "autoplay": true,
                         "src": "assets/sound/music/ambient.mp3"
                     }
+                },
+                {
+                    "type": "mute-all",
+                    "active": false
                 }
             ]
         },
@@ -675,6 +679,9 @@
                         "_myThrowStrengthExtraPercentage": 0.4000000059604645,
                         "_mySnapOnPivot": false
                     }
+                },
+                {
+                    "type": "grab-extra"
                 }
             ],
             "transformation": [
@@ -2133,6 +2140,9 @@
                         "_myCollider": "121",
                         "_mySnapOnPivot": false
                     }
+                },
+                {
+                    "type": "grab-extra"
                 }
             ],
             "transformation": [
