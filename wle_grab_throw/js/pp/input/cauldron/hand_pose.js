@@ -10,10 +10,10 @@ PP.HandPose = class HandPose {
         this._myReferenceSpace = [0, 0, 0];
 
         this._myPosition = [0, 0, 0];
-        this._myRotation = [0, 0, 0];
+        this._myRotation = [0, 0, 0, 0];
 
         this._myPrevPosition = [0, 0, 0];
-        this._myPrevRotation = [0, 0, 0];
+        this._myPrevRotation = [0, 0, 0, 0];
 
         this._myLinearVelocity = [0, 0, 0];
         this._myAngularVelocity = [0, 0, 0];
@@ -29,11 +29,6 @@ PP.HandPose = class HandPose {
 
     getRotation() {
         return this._myRotation;
-    }
-
-    getRotationQuaternion() {
-        return null; //#TODO
-
     }
 
     getLinearVelocity() {
@@ -56,7 +51,7 @@ PP.HandPose = class HandPose {
 
     update(dt) {
         glMatrix.vec3.copy(this._myPrevPosition, this._myPosition);
-        glMatrix.vec3.copy(this._myPrevRotation, this._myRotation);
+        glMatrix.quat.copy(this._myPrevRotation, this._myRotation);
 
         let xrFrame = Module['webxr_frame'];
         if (xrFrame && this._myInputSource) {
@@ -70,6 +65,7 @@ PP.HandPose = class HandPose {
                 this._myRotation[0] = xrPose.transform.orientation.x;
                 this._myRotation[1] = xrPose.transform.orientation.y;
                 this._myRotation[2] = xrPose.transform.orientation.z;
+                this._myRotation[3] = xrPose.transform.orientation.w;
 
                 if (xrPose.linearVelocity && !this._myForceEmulatedVelocities) {
                     this._myLinearVelocity[0] = xrPose.linearVelocity.x;
@@ -113,7 +109,7 @@ PP.HandPose = class HandPose {
 
     _computeEmulatedAngularVelocity(dt) {
         if (dt > 0) {
-            glMatrix.vec3.subtract(this._myAngularVelocity, this._myRotation, this._myPrevRotation);
+            glMatrix.vec3.subtract(this._myAngularVelocity, PP.MathUtils.quaternionToEuler(this._myRotation), PP.MathUtils.quaternionToEuler(this._myPrevRotation));
             glMatrix.vec3.scale(this._myAngularVelocity, this._myAngularVelocity, 1 / dt);
         } else {
             this._myAngularVelocity[0] = 0;
