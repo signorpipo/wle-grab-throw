@@ -362,7 +362,7 @@
                         "_myHandedness": "left",
                         "_myShowOnStart": true
                     },
-                    "active": true
+                    "active": false
                 },
                 {
                     "type": "easy-tune",
@@ -1799,7 +1799,7 @@
             ]
         },
         "102": {
-            "name": "Melon",
+            "name": "Watermelon",
             "parent": "69",
             "transformation": [
                 0.10000000149011612,
@@ -1862,7 +1862,7 @@
         "111": {
             "link": {
                 "name": "Circle",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "parent": "102",
             "transformation": [
@@ -1955,7 +1955,7 @@
         "113": {
             "link": {
                 "name": "Circle",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "parent": "112",
             "transformation": [
@@ -2055,7 +2055,7 @@
         "118": {
             "link": {
                 "name": "Circle",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "parent": "117",
             "transformation": [
@@ -2118,7 +2118,7 @@
         "120": {
             "link": {
                 "name": "Circle",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "parent": "119",
             "transformation": [
@@ -2900,25 +2900,25 @@
         "107": {
             "link": {
                 "name": "Circle",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             }
         },
         "108": {
             "link": {
                 "name": "Circle.0",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             }
         },
         "109": {
             "link": {
                 "name": "Circle.1",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             }
         },
         "110": {
             "link": {
                 "name": "Circle.2",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             }
         }
     },
@@ -3076,7 +3076,7 @@
         "103": {
             "link": {
                 "name": "Melon_Red",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "Phong": {
                 "ambientColor": [
@@ -3090,7 +3090,7 @@
         "104": {
             "link": {
                 "name": "Melon_White",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "Phong": {
                 "ambientColor": [
@@ -3104,7 +3104,7 @@
         "105": {
             "link": {
                 "name": "Melon_Green",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             },
             "Phong": {
                 "ambientColor": [
@@ -3118,7 +3118,7 @@
         "106": {
             "link": {
                 "name": "Melon_Black",
-                "file": "assets\\models\\melon.glb"
+                "file": "assets\\models\\watermelon.glb"
             }
         }
     },
@@ -3239,6 +3239,6 @@
         "assets/models/flatSphere.glb",
         "assets/models/target.glb",
         "assets/models/target_collision.glb",
-        "assets/models/melon.glb"
+        "assets/models/watermelon.glb"
     ]
 }
