@@ -1,7 +1,7 @@
 WL.registerComponent('easy-tune', {
     _myHandedness: { type: WL.Type.Enum, values: ['none', 'left', 'right'], default: 'none' },
     _myShowOnStart: { type: WL.Type.Bool, default: false },
-    _myShowVisibilityButton: { type: WL.Type.Bool, default: false },
+    _myShowVisibilityButton: { type: WL.Type.Bool, default: true },
     _myPlaneMaterial: { type: WL.Type.Material, default: null },
     _myTextMaterial: { type: WL.Type.Material, default: null }
 }, {
