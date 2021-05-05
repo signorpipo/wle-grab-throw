@@ -11,9 +11,11 @@ WL.registerComponent('grab-extra', {
     start: function () {
     },
     update: function (dt) {
-
         if (PP.RightGamepad.getButtonInfo(PP.ButtonType.TOP_BUTTON).isPressStart()) {
             this._myGrab._mySnapOnPivot = !this._myGrab._mySnapOnPivot;
+        }
+        if (PP.LeftGamepad.getButtonInfo(PP.ButtonType.TOP_BUTTON).isPressStart()) {
+            this._myGrab._myHandPose._myForceEmulatedVelocities = !this._myGrab._myHandPose._myForceEmulatedVelocities;
         }
         this._myGrab._myThrowLinearStrengthMinThreshold = PP.EasyTuneVariables.get("Min Thres").myValue;
         this._myGrab._myThrowLinearStrengthMaxThreshold = PP.EasyTuneVariables.get("Max Thres").myValue;

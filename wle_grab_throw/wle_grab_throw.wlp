@@ -327,7 +327,7 @@
                 },
                 {
                     "type": "mute-all",
-                    "active": false
+                    "active": true
                 }
             ]
         },
@@ -360,7 +360,7 @@
                         "_myPlaneMaterial": "66",
                         "_myTextMaterial": "DefaultFontMaterial",
                         "_myHandedness": "left",
-                        "_myShowOnStart": false
+                        "_myShowOnStart": true
                     },
                     "active": false
                 },
@@ -681,17 +681,20 @@
                         "_myThrowStrengthMultiplier": 2,
                         "_myThrowStrengthExtraPercentage": 0.4000000059604645,
                         "_mySnapOnPivot": false
-                    }
+                    },
+                    "active": true
                 },
                 {
-                    "type": "grab-extra"
+                    "type": "grab-extra",
+                    "active": true
                 },
                 {
                     "type": "grab-sfx",
                     "grab-sfx": {
                         "_myGrabSFX": "136",
                         "_myThrowSFX": "137"
-                    }
+                    },
+                    "active": true
                 }
             ],
             "transformation": [
@@ -2156,17 +2159,20 @@
                     "grab": {
                         "_myCollider": "121",
                         "_mySnapOnPivot": false
-                    }
+                    },
+                    "active": true
                 },
                 {
-                    "type": "grab-extra"
+                    "type": "grab-extra",
+                    "active": true
                 },
                 {
                     "type": "grab-sfx",
                     "grab-sfx": {
                         "_myGrabSFX": "131",
                         "_myThrowSFX": "132"
-                    }
+                    },
+                    "active": true
                 }
             ],
             "transformation": [

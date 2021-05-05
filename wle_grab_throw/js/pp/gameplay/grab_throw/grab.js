@@ -3,7 +3,6 @@ WL.registerComponent('grab', {
     _mySnapOnPivot: { type: WL.Type.Bool, default: false }
 }, {
     init: function () {
-
         this._myHandPose = new PP.HandPose(PP.InputUtils.getHandednessByIndex(this._myHandedness + 1));
 
         this._myGrabbed = null;

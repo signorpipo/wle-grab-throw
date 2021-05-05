@@ -1,15 +1,19 @@
 PP.HandPose = class HandPose {
 
-    constructor(handedness) {
+    constructor(handedness, forceEmulatedVelocities) {
         this._mySession = null;
         this._myInputSource = null;
 
         this._myHandedness = handedness;
+        this._myForceEmulatedVelocities = forceEmulatedVelocities;
 
         this._myReferenceSpace = [0, 0, 0];
 
         this._myPosition = [0, 0, 0];
         this._myRotation = [0, 0, 0];
+
+        this._myPrevPosition = [0, 0, 0];
+        this._myPrevRotation = [0, 0, 0];
 
         this._myLinearVelocity = [0, 0, 0];
         this._myAngularVelocity = [0, 0, 0];
@@ -33,12 +37,12 @@ PP.HandPose = class HandPose {
     }
 
     getLinearVelocity() {
-        return this._myLinearVelocity; //#TODO default when no linear velocity found
+        return this._myLinearVelocity;
 
     }
 
     getAngularVelocity() {
-        return this._myAngularVelocity; //#TODO default when no angular velocity found
+        return this._myAngularVelocity;
 
     }
 
@@ -51,6 +55,9 @@ PP.HandPose = class HandPose {
     }
 
     update(dt) {
+        glMatrix.vec3.copy(this._myPrevPosition, this._myPosition);
+        glMatrix.vec3.copy(this._myPrevRotation, this._myRotation);
+
         let xrFrame = Module['webxr_frame'];
         if (xrFrame && this._myInputSource) {
             let xrPose = xrFrame.getPose(this._myInputSource.gripSpace, this._myReferenceSpace);
@@ -64,36 +71,54 @@ PP.HandPose = class HandPose {
                 this._myRotation[1] = xrPose.transform.orientation.y;
                 this._myRotation[2] = xrPose.transform.orientation.z;
 
-                if (xrPose.linearVelocity) {
+                if (xrPose.linearVelocity && !this._myForceEmulatedVelocities) {
                     this._myLinearVelocity[0] = xrPose.linearVelocity.x;
                     this._myLinearVelocity[1] = xrPose.linearVelocity.y;
                     this._myLinearVelocity[2] = xrPose.linearVelocity.z;
                 } else {
-                    this._myLinearVelocity[0] = 0;
-                    this._myLinearVelocity[1] = 0;
-                    this._myLinearVelocity[2] = 0;
+                    this._computeEmulatedLinearVelocity(dt);
                 }
 
-                if (xrPose.angularVelocity) {
+                if (xrPose.angularVelocity && !this._myForceEmulatedVelocities) {
                     this._myAngularVelocity[0] = xrPose.angularVelocity.x;
                     this._myAngularVelocity[1] = xrPose.angularVelocity.y;
                     this._myAngularVelocity[2] = xrPose.angularVelocity.z;
                 } else {
-                    this._myAngularVelocity[0] = 0;
-                    this._myAngularVelocity[1] = 0;
-                    this._myAngularVelocity[2] = 0;
+                    this._computeEmulatedAngularVelocity(dt);
                 }
             } else {
                 //keep previous position and rotation but reset velocity because reasons
 
-                this._myAngularVelocity[0] = 0;
-                this._myAngularVelocity[1] = 0;
-                this._myAngularVelocity[2] = 0;
-
                 this._myLinearVelocity[0] = 0;
                 this._myLinearVelocity[1] = 0;
                 this._myLinearVelocity[2] = 0;
+
+                this._myAngularVelocity[0] = 0;
+                this._myAngularVelocity[1] = 0;
+                this._myAngularVelocity[2] = 0;
             }
+        }
+    }
+
+    _computeEmulatedLinearVelocity(dt) {
+        if (dt > 0) {
+            glMatrix.vec3.subtract(this._myLinearVelocity, this._myPosition, this._myPrevPosition);
+            glMatrix.vec3.scale(this._myLinearVelocity, this._myLinearVelocity, 1 / dt);
+        } else {
+            this._myLinearVelocity[0] = 0;
+            this._myLinearVelocity[1] = 0;
+            this._myLinearVelocity[2] = 0;
+        }
+    }
+
+    _computeEmulatedAngularVelocity(dt) {
+        if (dt > 0) {
+            glMatrix.vec3.subtract(this._myAngularVelocity, this._myRotation, this._myPrevRotation);
+            glMatrix.vec3.scale(this._myAngularVelocity, this._myAngularVelocity, 1 / dt);
+        } else {
+            this._myAngularVelocity[0] = 0;
+            this._myAngularVelocity[1] = 0;
+            this._myAngularVelocity[2] = 0;
         }
     }
 
