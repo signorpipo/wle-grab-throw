@@ -8,15 +8,11 @@ WL.registerComponent('grab', {
         this._myGrabbed = null;
 
         this._myGamepad = null;
-
         if (this._myHandedness + 1 == PP.HandednessIndex.LEFT) {
             this._myGamepad = PP.LeftGamepad;
         } else {
             this._myGamepad = PP.RightGamepad;
         }
-
-        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_START, this, this._grab.bind(this));
-        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_END, this, this._throw.bind(this));
 
         this._myHistorySize = 5;
         this._myHistoryStrengthAverageFromStart = 1;
@@ -39,6 +35,9 @@ WL.registerComponent('grab', {
         this._myThrowCallbacks = new Map();
     },
     start: function () {
+        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_START, this, this._grab.bind(this));
+        this._myGamepad.registerButtonEventListener(PP.ButtonType.SELECT, PP.ButtonEvent.PRESS_END, this, this._throw.bind(this));
+
         this._myCollision = this.object.getComponent('collision');
         this._myHandPose.start();
     },

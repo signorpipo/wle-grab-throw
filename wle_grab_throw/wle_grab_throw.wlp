@@ -327,7 +327,7 @@
                 },
                 {
                     "type": "mute-all",
-                    "active": true
+                    "active": false
                 }
             ]
         },
@@ -362,7 +362,7 @@
                         "_myHandedness": "left",
                         "_myShowOnStart": true
                     },
-                    "active": false
+                    "active": true
                 },
                 {
                     "type": "easy-tune",
@@ -472,9 +472,9 @@
                     "type": "tool-cursor",
                     "tool-cursor": {
                         "_myHandedness": "right",
+                        "_myShowFingerCursor": true,
                         "_myCursorMesh": "9",
-                        "_myCursorMaterial": "66",
-                        "_myShowFingerCursor": false
+                        "_myCursorMaterial": "66"
                     }
                 }
             ],

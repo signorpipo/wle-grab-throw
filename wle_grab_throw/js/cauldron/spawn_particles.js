@@ -101,7 +101,7 @@ WL.registerComponent('spawn-particles', {
             }
         }
     },
-    spawn() {
+    spawn: function () {
         this._mySpawn = true;
     }
 });

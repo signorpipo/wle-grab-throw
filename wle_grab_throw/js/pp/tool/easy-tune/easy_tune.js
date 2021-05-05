@@ -6,8 +6,6 @@ WL.registerComponent('easy-tune', {
     _myTextMaterial: { type: WL.Type.Material, default: null }
 }, {
     init: function () {
-        this._myWidget = new PP.EasyTuneWidget();
-
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("X", 0, 0.5, 4));
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Y", 0, 0.5, 4));
         PP.EasyTuneVariables.addVariable(new PP.EasyTuneNumber("Z", 0, 0.5, 4));
@@ -26,6 +24,7 @@ WL.registerComponent('easy-tune', {
         additionalSetup.myTextMaterial = this._myTextMaterial;
 
         //Change FIRST with a variable name you would like to be selected at start
+        this._myWidget = new PP.EasyTuneWidget();
         this._myWidget.start(this.object, additionalSetup, PP.EasyTuneVariables, "FIRST");
     },
     update: function (dt) {
