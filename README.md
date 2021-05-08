@@ -3,7 +3,7 @@
 <img src="https://github.com/SignorPipo/wle_grab_throw/blob/main/extra/showdonttell.gif">
 </p>
 
-## Description
+## Overview
 A showcase of the Grab & Throw feature for the Wonderland Engine
 
 ### Tricks
